@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'cssdroid'
 
 android {
     compileSdkVersion 23
@@ -19,8 +20,16 @@ android {
     }
 }
 
+buildscript {
+    repositories {
+        mavenLocal()
+    }
+    dependencies {
+        classpath 'com.manolovn:cssdroid:1.0.0'
+    }
+}
+
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.android.support:design:23.1.1'

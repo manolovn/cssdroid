@@ -1,4 +1,4 @@
-package com.manolovn.cssdroid;
+package com.manolovn.cssdroid.sample;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
