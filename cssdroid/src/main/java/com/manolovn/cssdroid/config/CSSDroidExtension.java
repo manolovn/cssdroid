@@ -5,8 +5,8 @@ package com.manolovn.cssdroid.config;
  */
 public class CSSDroidExtension {
 
-    private String cssDir = "/../src/main/acss/";
-    private String outputDir = "/../src/main/res/values/";
+    private String cssDir = "/src/main/acss/";
+    private String outputDir = "/src/main/res/values/";
 
     public String getCssDir() {
         return cssDir;
