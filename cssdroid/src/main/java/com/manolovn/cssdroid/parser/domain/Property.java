@@ -3,7 +3,7 @@ package com.manolovn.cssdroid.parser.domain;
 /**
  * Property entity
  */
-public class Property {
+public class Property implements Node {
 
     private final String name;
     private final String value;
