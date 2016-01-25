@@ -1,0 +1,17 @@
+@brand-color: #4455EE;
+
+.header {
+    backgroundColor: @brand-color;
+    textColor: #111222;
+    marginRight: 12dp;
+}
+.footer { color: @brand-color; }
+
+@accent-color: #4455DD;
+
+.empty {}
+
+.h3 {
+    color: @brand-color;
+    fontSize: 18sp;
+}

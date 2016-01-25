@@ -4,9 +4,8 @@ apply plugin: 'cssdroid'
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
-
     defaultConfig {
-        applicationId "com.manolovn.cssdroid"
+        applicationId 'com.manolovn.sample'
         minSdkVersion 15
         targetSdkVersion 23
         versionCode 1
@@ -25,7 +24,7 @@ buildscript {
         mavenLocal()
     }
     dependencies {
-        classpath 'com.manolovn:cssdroid:1.0.0'
+        classpath 'com.manolovn:cssdroid:0.1.0'
     }
 }
 

@@ -1,5 +1,5 @@
-apply plugin: "java"
-apply plugin: "idea"
+apply plugin: 'java'
+apply plugin: 'idea'
 apply plugin: 'maven'
 
 buildscript {
@@ -7,7 +7,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:0.3"
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:0.3'
     }
 }
 
@@ -20,7 +20,7 @@ repositories {
 }
 
 group = 'com.manolovn'
-version = '1.0.0'
+version = '0.1.0'
 
 install {
     repositories.mavenInstaller {
