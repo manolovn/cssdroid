@@ -6,21 +6,15 @@ package com.manolovn.cssdroid.parser.lexer.domain;
 public enum TokenType {
     VARIABLE,
     SELECTOR,
-    HEX_COLOR,
+    COLOR,
     SEMICOLON,
     EQUAL,
-    WHITESPACES,
     OPEN_RULE,
     CLOSE_RULE,
     PROPERTY,
     NUMBER,
+    DIMENSION,
     OPEN_BRACKET,
     CLOSE_BRACKET,
-
-    PLUSMINUS,
-    MULTDIV,
-    RAISED,
-    FUNCTION,
-
     END
 }

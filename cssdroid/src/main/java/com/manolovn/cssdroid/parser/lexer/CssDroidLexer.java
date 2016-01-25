@@ -33,8 +33,8 @@ public class CssDroidLexer {
         add("@([-a-zA-Z]+)", TokenType.VARIABLE);
         add("^\\.([^\\s]+).", TokenType.SELECTOR);
         add("([-a-zA-Z]+)", TokenType.PROPERTY);
-        add("#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})", TokenType.HEX_COLOR);
-        add("\\s+", TokenType.WHITESPACES);
+        add("#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})", TokenType.COLOR);
+        add("[0-9]+(dp|dip|sp)", TokenType.DIMENSION);
         add("(?:\\d+\\.?|\\.\\d)\\d*(?:[Ee][-+]?\\d+)?", TokenType.NUMBER);
         add("\\(", TokenType.OPEN_BRACKET);
         add("\\)", TokenType.CLOSE_BRACKET);
