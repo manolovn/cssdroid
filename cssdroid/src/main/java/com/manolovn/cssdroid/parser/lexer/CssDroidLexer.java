@@ -36,7 +36,7 @@ public class CssDroidLexer {
                 }
             }
             if (!match) {
-                throw new ParserException("Unexpected character in input: (" + input + ")");
+                throw new LexerException("Unexpected character in input: (" + input + ")");
             }
         }
     }

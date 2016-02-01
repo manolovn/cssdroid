@@ -15,6 +15,7 @@ import com.manolovn.cssdroid.parser.lexer.domain.TokenType;
 import com.manolovn.cssdroid.parser.visitor.ApplyVariableVisitor;
 import com.manolovn.cssdroid.parser.visitor.EvalFunctionVisitor;
 import com.manolovn.cssdroid.parser.visitor.NodeVisitor;
+import com.manolovn.cssdroid.util.Preconditions;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -46,6 +47,8 @@ public class CssDroidSyntaxParser {
     }
 
     private StyleSheet parseTokens(List<Token> tokens) {
+        Preconditions.checkArgument(!tokens.isEmpty(), "No tokens to parse");
+
         this.tokens = new LinkedList<>(tokens);
         lookAhead = this.tokens.getFirst();
 

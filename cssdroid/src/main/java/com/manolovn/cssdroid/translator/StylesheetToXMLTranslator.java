@@ -18,9 +18,9 @@ public class StylesheetToXMLTranslator {
         String output = writer.start();
         output += writer.newLine();
         for (Node node : styleSheet.getRules()) {
-            output += writer.openStyle(node.getName().replace(".", ""));
+            output += writer.openStyle(node.getName());
             for(Node child : node.children()) {
-                output += writer.addProperty(child.getName().replace("-", "_"), child.getValue());
+                output += writer.addProperty(child.getName(), child.getValue());
             }
             output += writer.closeStyle();
             output += writer.newLine();

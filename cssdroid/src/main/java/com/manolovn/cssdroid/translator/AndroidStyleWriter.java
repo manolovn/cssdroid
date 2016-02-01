@@ -20,7 +20,7 @@ public class AndroidStyleWriter {
     }
 
     public String openStyle(String style) {
-        return "    <style name=\"" + StringUtils.capitalize(style) + "\">\n";
+        return "    <style name=\"" + StringUtils.capitalize(style.replace(".", "")) + "\">\n";
     }
 
     public String closeStyle() {
@@ -28,6 +28,7 @@ public class AndroidStyleWriter {
     }
 
     public String addProperty(String name, String value) {
-        return "        <item name=\"android:" + name + "\">" + value + "</item>\n";
+        return "        <item name=\"android:" + name.replace("-", "_") + "\">"
+                + value + "</item>\n";
     }
 }
