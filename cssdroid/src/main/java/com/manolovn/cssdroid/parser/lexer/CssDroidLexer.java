@@ -1,8 +1,10 @@
 package com.manolovn.cssdroid.parser.lexer;
 
-import com.manolovn.cssdroid.parser.lexer.domain.TokenInfo;
+import com.manolovn.cssdroid.parser.domain.FunctionType;
+import com.manolovn.cssdroid.parser.lexer.domain.Lexem;
 import com.manolovn.cssdroid.parser.lexer.domain.Token;
 import com.manolovn.cssdroid.parser.lexer.domain.TokenType;
+import com.manolovn.cssdroid.util.StringUtils;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -14,17 +16,20 @@ import java.util.regex.Pattern;
  */
 public class CssDroidLexer {
 
-    private LinkedList<TokenInfo> tokenInfos;
+    private static final String EMPTY = "";
+
+    private LinkedList<Lexem> lexems;
     private LinkedList<Token> tokens;
 
     public CssDroidLexer() {
-        tokenInfos = new LinkedList<>();
+        lexems = new LinkedList<>();
         tokens = new LinkedList<>();
 
-        init();
+        initGrammar();
     }
 
-    private void init() {
+    private void initGrammar() {
+        add("(" + StringUtils.join(FunctionType.values(), "|") + ")", TokenType.FUNCTION);
         add(";", TokenType.SEMICOLON);
         add("^:", TokenType.EQUAL);
         add("^=", TokenType.EQUAL);
@@ -38,19 +43,20 @@ public class CssDroidLexer {
         add("(?:\\d+\\.?|\\.\\d)\\d*(?:[Ee][-+]?\\d+)?", TokenType.NUMBER);
         add("\\(", TokenType.OPEN_BRACKET);
         add("\\)", TokenType.CLOSE_BRACKET);
+        add("^,", TokenType.COMMA);
     }
 
     public void tokenize(String input) {
         input = input.trim();
         tokens.clear();
-        while (!input.equals("")) {
+        while (inputIsNotEmpty(input)) {
             boolean match = false;
-            for (TokenInfo info : tokenInfos) {
+            for (Lexem info : lexems) {
                 Matcher matcher = info.regex.matcher(input);
                 if (matcher.find()) {
                     match = true;
                     String tok = matcher.group(0).trim();
-                    input = matcher.replaceFirst("").trim();
+                    input = matcher.replaceFirst(EMPTY).trim();
                     tokens.add(new Token(info.token, tok));
                     break;
                 }
@@ -66,7 +72,11 @@ public class CssDroidLexer {
     }
 
     public void add(String regex, TokenType token) {
-        tokenInfos.add(new TokenInfo(Pattern.compile("^(" + regex + ")"), token));
+        lexems.add(new Lexem(Pattern.compile("^(" + regex + ")"), token));
+    }
+
+    private boolean inputIsNotEmpty(String input) {
+        return !input.equals(EMPTY);
     }
 
 }
