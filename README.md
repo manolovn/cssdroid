@@ -1,2 +1,2 @@
-# cssdroid : convert CSS files to Android styles
+# CSSdroid - convert CSS files to Android styles
 
