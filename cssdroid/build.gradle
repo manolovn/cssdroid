@@ -1,6 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'maven'
+apply from: 'quality/jacoco.gradle'
 
 buildscript {
     repositories {
@@ -13,10 +14,9 @@ buildscript {
 
 dependencies {
     compile gradleApi()
-}
 
-repositories {
-    jcenter()
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.mockito:mockito-all:2.0.2-beta'
 }
 
 group = 'com.manolovn'
