@@ -8,8 +8,5 @@ install:
 before_install:
   - pip install --user codecov
 
-script:
-  - ./gradlew build jacocoTestReport
-
 after_success:
   - codecov
