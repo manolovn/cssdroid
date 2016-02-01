@@ -1,6 +1,9 @@
 language: java
 sudo: false
 
+install:
+    - ./gradlew install
+
 before_install:
   - pip install --user codecov
 
