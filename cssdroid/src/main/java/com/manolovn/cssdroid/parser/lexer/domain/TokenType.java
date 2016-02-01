@@ -16,5 +16,7 @@ public enum TokenType {
     DIMENSION,
     OPEN_BRACKET,
     CLOSE_BRACKET,
+    FUNCTION,
+    COMMA,
     END
 }
