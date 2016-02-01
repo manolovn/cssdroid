@@ -2,11 +2,10 @@ language: java
 sudo: false
 
 install:
-    - ./gradlew install
+    - ./gradlew cssdroid:install
 
 before_install:
   - pip install --user codecov
-  - ./gradlew cssdroid:install
 
 after_success:
   - codecov
