@@ -12,7 +12,11 @@ import com.manolovn.cssdroid.parser.lexer.CssDroidLexer;
 import com.manolovn.cssdroid.parser.lexer.ParserException;
 import com.manolovn.cssdroid.parser.lexer.domain.Token;
 import com.manolovn.cssdroid.parser.lexer.domain.TokenType;
+import com.manolovn.cssdroid.parser.visitor.ApplyVariableVisitor;
+import com.manolovn.cssdroid.parser.visitor.EvalFunctionVisitor;
+import com.manolovn.cssdroid.parser.visitor.NodeVisitor;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -34,14 +38,10 @@ public class CssDroidSyntaxParser {
     public StyleSheet parseTokens(String content) {
         try {
             lexer.tokenize(content);
-            for (Token tok : lexer.getTokens()) {
-                System.out.println(tok.token + " " + tok.sequence);
-            }
             styleSheet = parseTokens(lexer.getTokens());
         } catch (ParserException e) {
             System.out.println(e.getMessage());
         }
-        System.out.println(styleSheet.getRules());
         return styleSheet;
     }
 
@@ -57,8 +57,22 @@ public class CssDroidSyntaxParser {
                     "Unexpected symbol " + lookAhead.token + " found " + lookAhead.sequence);
         }
 
-        System.out.println(styleSheet.getVariables());
-        System.out.println(styleSheet.getRules());
+        List<NodeVisitor> nodeVisitors = new ArrayList<>();
+        for (VariableNode node : styleSheet.getVariables()) {
+            nodeVisitors.add(new ApplyVariableVisitor(node.getName(), node.getValue()));
+        }
+
+        for (Node node : styleSheet.getRules()) {
+            for (NodeVisitor visitor : nodeVisitors) {
+                node.accept(visitor);
+            }
+        }
+
+        EvalFunctionVisitor evalFunctionVisitor = new EvalFunctionVisitor();
+        for (Node node : styleSheet.getRules()) {
+            node.accept(evalFunctionVisitor);
+        }
+
         return styleSheet;
     }
 
@@ -78,7 +92,6 @@ public class CssDroidSyntaxParser {
 
     private Node extractRule(Node node) {
         if (lookAhead.token == TokenType.SELECTOR) {
-            System.out.println("current selector -> " + lookAhead.sequence);
             SelectorNode selectorNode = new SelectorNode(lookAhead.sequence);
             nextToken();
             selectorNode.addChild(extractRule(selectorNode));
@@ -98,7 +111,6 @@ public class CssDroidSyntaxParser {
 
     private void extractProperties(Node node) {
         if (lookAhead.token == TokenType.PROPERTY) {
-            System.out.println("current property -> " + lookAhead.sequence);
             String property = lookAhead.sequence;
             nextToken();
             node.addChild(new PropertyNode(property, extractVar()));
@@ -140,7 +152,6 @@ public class CssDroidSyntaxParser {
     }
 
     private void extractArguments(Node node) {
-        System.out.println(node);
         if (lookAhead.token == TokenType.COMMA) {
             nextToken();
         }
@@ -156,7 +167,6 @@ public class CssDroidSyntaxParser {
             String value = lookAhead.sequence;
             nextToken();
             endExpression();
-            System.out.println("extracting value number " + lookAhead.sequence);
             return new ValueNode(value);
         } else if (lookAhead.token == TokenType.COLOR) {
             String value = lookAhead.sequence;
