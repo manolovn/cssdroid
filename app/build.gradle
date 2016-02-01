@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'cssdroid'
 
 android {
     compileSdkVersion 23
@@ -22,9 +21,6 @@ android {
 buildscript {
     repositories {
         mavenLocal()
-    }
-    dependencies {
-        classpath 'com.manolovn:cssdroid:0.1.0'
     }
 }
 
