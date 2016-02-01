@@ -1,11 +1,11 @@
 package com.manolovn.cssdroid.parser.processor;
 
-import com.manolovn.cssdroid.parser.domain.Property;
+import com.manolovn.cssdroid.parser.domain.FunctionNode;
 
 /**
  * Processor behavior
  */
 public interface Processor {
 
-    String eval(Property value);
+    String eval(FunctionNode node);
 }
