@@ -3,3 +3,5 @@ apply plugin: 'jacoco'
 jacoco {
     toolVersion = "0.7.1.201405082137"
 }
+
+check.dependsOn jacocoTestReport
