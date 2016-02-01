@@ -1,14 +1,16 @@
 package com.manolovn.cssdroid.parser.domain;
 
-import java.util.Collection;
+import com.manolovn.cssdroid.parser.visitor.NodeVisitor;
+
 import java.util.Collections;
+import java.util.List;
 
 /**
  * Value node
  */
 public class ValueNode implements Node {
 
-    private final String value;
+    private String value;
 
     public ValueNode(String value) {
         this.value = value;
@@ -30,12 +32,21 @@ public class ValueNode implements Node {
     }
 
     @Override
-    public Collection<Node> children() {
+    public List<Node> children() {
         return Collections.emptyList();
+    }
+
+    @Override
+    public void accept(NodeVisitor visitor) {
+        visitor.visit(this);
     }
 
     @Override
     public String toString() {
         return "val: " + value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
     }
 }

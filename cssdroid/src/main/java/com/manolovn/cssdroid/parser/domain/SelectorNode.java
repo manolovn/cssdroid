@@ -1,7 +1,8 @@
 package com.manolovn.cssdroid.parser.domain;
 
+import com.manolovn.cssdroid.parser.visitor.NodeVisitor;
+
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -36,8 +37,15 @@ public class SelectorNode implements Node {
     }
 
     @Override
-    public Collection<Node> children() {
+    public List<Node> children() {
         return properties;
+    }
+
+    @Override
+    public void accept(NodeVisitor visitor) {
+        for (Node node : children()) {
+            node.accept(visitor);
+        }
     }
 
     @Override

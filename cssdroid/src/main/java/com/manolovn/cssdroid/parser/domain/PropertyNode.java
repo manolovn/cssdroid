@@ -1,7 +1,9 @@
 package com.manolovn.cssdroid.parser.domain;
 
-import java.util.Collection;
+import com.manolovn.cssdroid.parser.visitor.NodeVisitor;
+
 import java.util.Collections;
+import java.util.List;
 
 /**
  * PropertyNode entity
@@ -32,8 +34,13 @@ public class PropertyNode implements Node {
     }
 
     @Override
-    public Collection<Node> children() {
+    public List<Node> children() {
         return Collections.singletonList(value);
+    }
+
+    @Override
+    public void accept(NodeVisitor visitor) {
+        value.accept(visitor);
     }
 
     @Override

@@ -1,7 +1,8 @@
 package com.manolovn.cssdroid.parser.domain;
 
+import com.manolovn.cssdroid.parser.visitor.NodeVisitor;
+
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -10,7 +11,9 @@ import java.util.List;
 public class FunctionNode implements Node {
 
     private final FunctionType functionType;
+
     private List<Node> arguments;
+    private String value;
 
     public FunctionNode(FunctionType functionType) {
         this.functionType = functionType;
@@ -24,7 +27,11 @@ public class FunctionNode implements Node {
 
     @Override
     public String getValue() {
-        return arguments.toString();
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
     }
 
     @Override
@@ -33,8 +40,16 @@ public class FunctionNode implements Node {
     }
 
     @Override
-    public Collection<Node> children() {
+    public List<Node> children() {
         return arguments;
+    }
+
+    @Override
+    public void accept(NodeVisitor visitor) {
+        visitor.visit(this);
+        for (Node child : children()) {
+            child.accept(visitor);
+        }
     }
 
     @Override

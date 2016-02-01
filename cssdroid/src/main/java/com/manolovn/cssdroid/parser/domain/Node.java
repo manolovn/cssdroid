@@ -1,6 +1,8 @@
 package com.manolovn.cssdroid.parser.domain;
 
-import java.util.Collection;
+import com.manolovn.cssdroid.parser.visitor.NodeVisitor;
+
+import java.util.List;
 
 /**
  * Node entity
@@ -13,6 +15,8 @@ public interface Node {
 
     void addChild(Node node);
 
-    Collection<Node> children();
+    List<Node> children();
+
+    void accept(NodeVisitor visitor);
 
 }
