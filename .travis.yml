@@ -2,8 +2,8 @@ language: java
 jdk: oraclejdk7
 sudo: false
 
-install:
-  - ./gradlew clean install
+script:
+  - ./gradlew :cssdroid:clean :cssdroid:install
 
 before_install:
   - pip install --user codecov
