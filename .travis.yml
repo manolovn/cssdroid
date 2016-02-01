@@ -1,11 +1,15 @@
 language: java
+jdk: oraclejdk7
 sudo: false
 
 install:
-    - ./gradlew cssdroid:install
+  - ./gradlew install
 
 before_install:
   - pip install --user codecov
+
+script:
+  - ./gradlew build jacocoTestReport
 
 after_success:
   - codecov
