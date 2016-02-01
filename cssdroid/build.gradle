@@ -19,12 +19,9 @@ dependencies {
     testCompile 'org.mockito:mockito-all:2.0.2-beta'
 }
 
-group = 'com.manolovn'
-version = '0.1.0'
-
 install {
     repositories.mavenInstaller {
-        pom.version = version
+        pom.version = '0.1.0'
         pom.artifactId = 'cssdroid'
     }
 }
