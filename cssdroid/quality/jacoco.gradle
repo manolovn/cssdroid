@@ -3,25 +3,3 @@ apply plugin: 'jacoco'
 jacoco {
     toolVersion = "0.7.1.201405082137"
 }
-
-// get class dirs for project dependencies
-FileTree getJacocoClassDirs(List projects) {
-    def classDirs = fileTree(dir: "${buildDir}/intermediates/classes/debug",
-            excludes: ['**/BuildConfig.class', '**/R.class', '**/R$*.class'])
-    projects.each {
-        def projBuildDir = project(it).buildDir
-        classDirs += fileTree(dir: "${projBuildDir}/intermediates/classes/release",
-                excludes: ['**/BuildConfig.class', '**/R.class', '**/R$*.class'])
-    }
-    return classDirs
-}
-
-// get source dirs for project dependencies
-FileCollection getJacocoSrcDirs(List projects) {
-    Set srcDirs = android.sourceSets.main.java.srcDirs
-    projects.each {
-        def projDir = project(it).projectDir
-        srcDirs.add("${projDir}/src") // assume that android main sourceSets is here
-    }
-    return files(srcDirs)
-}
