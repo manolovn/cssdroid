@@ -1,9 +1,9 @@
 package com.manolovn.cssdroid.task;
 
 import com.manolovn.cssdroid.config.CSSDroidExtension;
-import com.manolovn.cssdroid.parser.CssDroidParser;
-import com.manolovn.cssdroid.parser.domain.Rule;
-import com.manolovn.cssdroid.translator.RuleToXMLTranslator;
+import com.manolovn.cssdroid.parser.CssDroidSyntaxParser;
+import com.manolovn.cssdroid.parser.domain.StyleSheet;
+import com.manolovn.cssdroid.translator.StylesheetToXMLTranslator;
 import com.manolovn.cssdroid.util.FileUtils;
 
 import org.gradle.api.DefaultTask;
@@ -15,21 +15,20 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
-import java.util.Collection;
 
 /**
  * Parse CSS task
  */
 public class ParseCSSTask extends DefaultTask {
 
-    private CssDroidParser parser;
-    private RuleToXMLTranslator translator;
+    private CssDroidSyntaxParser parser;
+    private StylesheetToXMLTranslator translator;
     private CSSDroidExtension configuration;
 
     @TaskAction
     public void generate() throws IOException {
-        parser = new CssDroidParser();
-        translator = new RuleToXMLTranslator();
+        parser = new CssDroidSyntaxParser();
+        translator = new StylesheetToXMLTranslator();
 
         configuration = getProject().getExtensions().findByType(CSSDroidExtension.class);
         if (configuration == null) {
@@ -57,10 +56,11 @@ public class ParseCSSTask extends DefaultTask {
 
     private void createStyleFile(File source, String name) throws IOException {
         File dest = new File(getProject().getProjectDir() + configuration.getOutputDir());
-        Collection<Rule> rules = parser.parse(source);
+        final String content = org.apache.commons.io.FileUtils.readFileToString(source);
+        StyleSheet styleSheet = parser.parseTokens(content);
         try (Writer writer = new BufferedWriter(new OutputStreamWriter(
                 new FileOutputStream(dest + "/styles-" + name + ".xml"), "utf-8"))) {
-            writer.write(translator.translate(rules));
+            writer.write(translator.translate(styleSheet));
         } catch (IOException e) {
             e.printStackTrace();
         }
