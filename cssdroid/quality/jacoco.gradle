@@ -4,4 +4,12 @@ jacoco {
     toolVersion = "0.7.1.201405082137"
 }
 
+jacocoTestReport {
+    reports {
+        xml.enabled = true
+        html.enabled = false
+        csv.enabled = false
+    }
+}
+
 check.dependsOn jacocoTestReport
