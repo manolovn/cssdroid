@@ -7,7 +7,11 @@ import com.manolovn.cssdroid.parser.domain.FunctionType;
  */
 public class ProcessorFactory {
 
-    public static Processor getByFunctionName(String functionName) {
+    private ProcessorFactory() {
+
+    }
+
+    public static Processor getFunctionByName(String functionName) {
         if (functionName.toLowerCase().equals(FunctionType.OPACITY.getName())) {
             return new Opacity();
         }

@@ -15,7 +15,7 @@ public class EvalFunctionVisitor implements NodeVisitor {
 
     @Override
     public void visit(FunctionNode node) {
-        Processor processor = ProcessorFactory.getByFunctionName(node.getName());
+        Processor processor = ProcessorFactory.getFunctionByName(node.getName());
         node.setValue(processor.eval(node));
     }
 
