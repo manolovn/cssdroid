@@ -6,6 +6,7 @@ import com.manolovn.cssdroid.parser.domain.PropertyNode;
 import com.manolovn.cssdroid.parser.domain.SelectorNode;
 import com.manolovn.cssdroid.parser.domain.StyleSheet;
 import com.manolovn.cssdroid.parser.domain.ValueNode;
+import com.manolovn.cssdroid.parser.domain.VariableNode;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -33,10 +34,13 @@ public class CssDroidSyntaxParserTest {
     }
 
     @Test
-    public void shouldExtractOneVariable() {
+    public void shouldExtractVariable() {
         StyleSheet styleSheet = parser.parseTokens("@variable: 12sp;");
 
+        Node node = styleSheet.getVariables().iterator().next();
+
         assertEquals(styleSheet.getVariables().size(), 1);
+        assertTrue(node.getName().equalsIgnoreCase("@variable"));
     }
 
     @Test
