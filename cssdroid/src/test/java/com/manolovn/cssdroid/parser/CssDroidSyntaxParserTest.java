@@ -1,16 +1,18 @@
 package com.manolovn.cssdroid.parser;
 
+import com.manolovn.cssdroid.parser.domain.FunctionNode;
 import com.manolovn.cssdroid.parser.domain.Node;
 import com.manolovn.cssdroid.parser.domain.PropertyNode;
 import com.manolovn.cssdroid.parser.domain.SelectorNode;
 import com.manolovn.cssdroid.parser.domain.StyleSheet;
+import com.manolovn.cssdroid.parser.domain.ValueNode;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.hamcrest.core.IsInstanceOf.instanceOf;
+import java.util.Iterator;
+
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -63,5 +65,33 @@ public class CssDroidSyntaxParserTest {
         assertEquals(styleSheet.getRules().size(), 1);
         assertTrue(node instanceof SelectorNode);
         assertTrue(node.getName().equalsIgnoreCase(".empty"));
+    }
+
+    @Test
+    public void shouldExtractFunction() {
+        StyleSheet styleSheet = parser.parseTokens(".sample {" +
+                "    background: opacity(#333333, 100);" +
+                "}");
+
+        Node selectorNode = styleSheet.getRules().iterator().next();
+
+        assertTrue(selectorNode instanceof SelectorNode);
+        assertTrue(selectorNode.getName().equalsIgnoreCase(".sample"));
+
+        Node propertyNode = selectorNode.children().get(0);
+        assertTrue(propertyNode instanceof PropertyNode);
+        assertTrue(propertyNode.getName().equalsIgnoreCase("background"));
+
+        Node functionNode = propertyNode.children().get(0);
+        assertTrue(functionNode instanceof FunctionNode);
+        assertTrue(functionNode.getName().equalsIgnoreCase("opacity"));
+
+        Node colorNode = functionNode.children().get(0);
+        assertTrue(colorNode instanceof ValueNode);
+        assertTrue(colorNode.getValue().equalsIgnoreCase("#333333"));
+
+        Node numberNode = functionNode.children().get(1);
+        assertTrue(numberNode instanceof ValueNode);
+        assertTrue(numberNode.getValue().equalsIgnoreCase("100"));
     }
 }

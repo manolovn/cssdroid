@@ -159,6 +159,7 @@ public class CssDroidSyntaxParser {
             nextToken();
         }
         if (lookAhead.token == TokenType.NUMBER
+                || lookAhead.token == TokenType.COLOR
                 || lookAhead.token == TokenType.VARIABLE) {
             node.addChild(value());
             extractArguments(node);
