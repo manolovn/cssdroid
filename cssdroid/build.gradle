@@ -2,6 +2,7 @@ apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'maven'
 apply from: 'quality/jacoco.gradle'
+apply from: 'quality/publish.gradle'
 
 buildscript {
     repositories {
@@ -21,7 +22,7 @@ dependencies {
 
 install {
     repositories.mavenInstaller {
-        pom.version = '0.1.0'
-        pom.artifactId = 'cssdroid'
+        pom.version = project.VERSION_NAME
+        pom.artifactId = project.POM_ARTIFACT_ID
     }
 }
