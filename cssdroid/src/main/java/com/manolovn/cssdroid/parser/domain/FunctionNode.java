@@ -54,9 +54,9 @@ public class FunctionNode implements Node {
 
     @Override
     public String toString() {
-        return "FunctionNode{" +
-                "functionType=" + functionType +
-                ", arguments=" + arguments.toString() +
-                '}';
+        return "FunctionNode{"
+                + "functionType=" + functionType
+                + ", arguments=" + arguments.toString()
+                + '}';
     }
 }

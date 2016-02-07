@@ -2,6 +2,7 @@ apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'maven'
 apply from: 'quality/jacoco.gradle'
+apply from: 'quality/checkstyle.gradle'
 apply from: 'quality/publish.gradle'
 
 buildscript {

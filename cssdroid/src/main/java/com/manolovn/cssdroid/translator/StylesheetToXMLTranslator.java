@@ -19,7 +19,7 @@ public class StylesheetToXMLTranslator {
         output += writer.newLine();
         for (Node node : styleSheet.getRules()) {
             output += writer.openStyle(node.getName());
-            for(Node child : node.children()) {
+            for (Node child : node.children()) {
                 output += writer.addProperty(child.getName(), child.getValue());
             }
             output += writer.closeStyle();
