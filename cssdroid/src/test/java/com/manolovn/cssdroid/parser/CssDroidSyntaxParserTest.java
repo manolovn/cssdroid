@@ -6,12 +6,9 @@ import com.manolovn.cssdroid.parser.domain.PropertyNode;
 import com.manolovn.cssdroid.parser.domain.SelectorNode;
 import com.manolovn.cssdroid.parser.domain.StyleSheet;
 import com.manolovn.cssdroid.parser.domain.ValueNode;
-import com.manolovn.cssdroid.parser.domain.VariableNode;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.Iterator;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -52,9 +49,9 @@ public class CssDroidSyntaxParserTest {
 
     @Test
     public void shouldExtractOneRuleWihtOneChild() {
-        StyleSheet styleSheet = parser.parseTokens(".empty {" +
-                "textColor: #444;" +
-                "}");
+        StyleSheet styleSheet = parser.parseTokens(".empty {"
+                + "textColor: #444;"
+                + "}");
 
         assertEquals(styleSheet.getRules().size(), 1);
         assertEquals(styleSheet.getRules().iterator().next().children().size(), 1);
@@ -73,9 +70,9 @@ public class CssDroidSyntaxParserTest {
 
     @Test
     public void shouldExtractFunction() {
-        StyleSheet styleSheet = parser.parseTokens(".sample {" +
-                "    background: opacity(#333333, 100);" +
-                "}");
+        StyleSheet styleSheet = parser.parseTokens(".sample {"
+                + "    background: opacity(#333333, 100);"
+                + "}");
 
         Node selectorNode = styleSheet.getRules().iterator().next();
 

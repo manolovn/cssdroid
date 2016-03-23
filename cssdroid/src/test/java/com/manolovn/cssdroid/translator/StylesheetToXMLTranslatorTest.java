@@ -1,6 +1,5 @@
 package com.manolovn.cssdroid.translator;
 
-import com.manolovn.cssdroid.parser.domain.Node;
 import com.manolovn.cssdroid.parser.domain.PropertyNode;
 import com.manolovn.cssdroid.parser.domain.SelectorNode;
 import com.manolovn.cssdroid.parser.domain.StyleSheet;
@@ -34,13 +33,13 @@ public class StylesheetToXMLTranslatorTest {
     }
 
     private void thenXmlIsGeneratedCorrectly() {
-        String expectedStyle = "<resources>\n" +
-                "\n" +
-                "    <style name=\"Sample\">\n" +
-                "        <item name=\"android:textSize\">12sp</item>\n" +
-                "    </style>\n" +
-                "\n" +
-                "</resources>\n";
+        String expectedStyle = "<resources>\n"
+                + "\n"
+                + "    <style name=\"Sample\">\n"
+                + "        <item name=\"android:textSize\">12sp</item>\n"
+                + "    </style>\n"
+                + "\n"
+                + "</resources>\n";
         assertEquals(expectedStyle.replace(" ", ""), styleGenerated.replace(" ", ""));
     }
 

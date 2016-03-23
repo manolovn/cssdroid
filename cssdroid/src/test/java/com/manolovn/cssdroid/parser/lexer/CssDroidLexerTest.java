@@ -51,9 +51,9 @@ public class CssDroidLexerTest {
 
     @Test
     public void shouldGenerateSelectorTokenWithPropertyToken() {
-        lexer.tokenize(".selector {" +
-                "background: #333333;" +
-                "}");
+        lexer.tokenize(".selector {"
+                + "background: #333333;"
+                + "}");
 
         List<Token> tokens = lexer.getTokens();
         equalsToken(tokens.get(0), new Token(TokenType.SELECTOR, ".selector"));
