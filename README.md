@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/manolovn/cssdroid.svg?branch=master)](https://travis-ci.org/manolovn/cssdroid)
-[![codecov.io](https://codecov.io/github/manolovn/cssdroid/coverage.svg?branch=master)](https://codecov.io/github/manolovn/cssdroid?branch=master)
+[![codecov](https://codecov.io/gh/manolovn/cssdroid/branch/master/graph/badge.svg)](https://codecov.io/gh/manolovn/cssdroid)
 [![Maven Central](https://img.shields.io/maven-central/v/com.manolovn/cssdroid.svg)](http://search.maven.org/#artifactdetails%7Ccom.manolovn%7Ccssdroid%7C0.1.0%7Cjar)
 
 # CSSdroid - convert CSS files to Android styles
